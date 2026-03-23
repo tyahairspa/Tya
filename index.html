@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#080808">
+<meta name="supported-color-schemes" content="dark">
+<style>
+  :root { color-scheme: dark only; }
+</style>
+<title>TYA Hair & Spa — Menu des Soins</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cinzel:wght@600;700;900&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+html {
+  scroll-behavior: smooth;
+  background-color: #080808 !important;
+  background: #080808 !important;
+}
+html, body {
+  -webkit-color-scheme: dark;
+  color-scheme: dark;
+}
+body {
+  background-color: #080808 !important;
+  background: #080808 !important;
+  color: #F2EBD9 !important;
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  overflow-x: hidden;
+  /* Forcer Safari à ne PAS appliquer le mode clair */
+  -webkit-appearance: none;
+  forced-color-adjust: none;
+  -webkit-forced-color-adjust: none;
+}
+
+/* ══ VARIABLES COULEURS EXPLICITES (pas de var()) ══ */
+
+/* ══ NAV DOTS ══ */
+.nav-dots {
+position: fixed;
+right: 1.2rem;
+top: 50%;
+-webkit-transform: translateY(-50%);
+transform: translateY(-50%);
+z-index: 500;
+display: -webkit-flex;
+display: flex;
+-webkit-flex-direction: column;
+flex-direction: column;
+gap: 1rem;
+}
+.nav-dot {
+width: 7px; height: 7px;
+border-radius: 50%;
+background-color: rgba(201,168,76,0.3);
+cursor: pointer;
+border: none;
+transition: all 0.3s ease;
+}
+.nav-dot.active, .nav-dot:hover {
+background-color: #C9A84C;
+box-shadow: 0 0 10px #C9A84C;
+}
+
+/* ══ HERO ══ */
+#hero {
+min-height: 100vh;
+background-color: #080808;
+display: -webkit-flex;
+display: flex;
+-webkit-flex-direction: column;
+flex-direction: column;
+-webkit-align-items: center;
+align-items: center;
+-webkit-justify-content: center;
+justify-content: center;
+position: relative;
+text-align: center;
+padding: 2rem 1.5rem;
+overflow: hidden;
+}
+
+/* Anneaux */
+.ring {
+position: absolute;
+border-radius: 50%;
+border: 1px solid rgba(201,168,76,0.12);
+pointer-events: none;
+}
+.ring:nth-child(1) { width:260px; height:260px; }
+.ring:nth-child(2) { width:440px; height:440px; border-color:rgba(201,168,76,0.08); }
+.ring:nth-child(3) { width:640px; height:640px; border-color:rgba(201,168,76,0.05); }
+
+.hero-inner {
+position: relative;
+z-index: 2;
+display: -webkit-flex;
+display: flex;
+-webkit-flex-direction: column;
+flex-direction: column;
+-webkit-align-items: center;
+align-items: center;
+}
+
+/* TYA — couleur or forcée, pas de clip */
+.hero-brand {
+font-family: ‘Cinzel’, serif;
+font-size: clamp(5rem, 22vw, 11rem);
+font-weight: 900;
+letter-spacing: 0.18em;
+color: #C9A84C;
+line-height: 1;
+text-shadow: 0 0 60px rgba(201,168,76,0.5), 0 2px 4px rgba(0,0,0,0.8);
+}
+
+.hero-sub {
+font-family: ‘Cormorant Garamond’, serif;
+font-style: italic;
+font-size: clamp(1.2rem, 4vw, 1.8rem);
+color: #C9A84C;
+letter-spacing: 0.4em;
+margin-top: 0.3rem;
+font-weight: 600;
+}
+
+.hero-orn {
+display: -webkit-flex;
+display: flex;
+-webkit-align-items: center;
+align-items: center;
+gap: 1rem;
+margin: 1rem 0;
+width: 240px;
+}
+.hero-orn-line {
+flex: 1;
+height: 1px;
+background: linear-gradient(to right, transparent, #C9A84C, transparent);
+}
+.hero-orn-gem { color: #C9A84C; font-size: 0.65rem; }
+
+.hero-tagline {
+font-size: 0.78rem;
+font-weight: 500;
+letter-spacing: 0.45em;
+color: rgba(242,235,217,0.55);
+text-transform: uppercase;
+margin-bottom: 0.5rem;
+}
+
+/* BOUTONS HERO */
+.hero-actions {
+display: -webkit-flex;
+display: flex;
+gap: 0.9rem;
+-webkit-justify-content: center;
+justify-content: center;
+margin-top: 2rem;
+-webkit-flex-wrap: wrap;
+flex-wrap: wrap;
+}
+
+.hero-btn {
+display: -webkit-inline-flex;
+display: inline-flex;
+-webkit-align-items: center;
+align-items: center;
+gap: 0.5rem;
+padding: 0.85rem 1.8rem;
+border-radius: 100px;
+font-family: ‘Jost’, sans-serif;
+font-weight: 600;
+font-size: 0.8rem;
+letter-spacing: 0.22em;
+text-transform: uppercase;
+text-decoration: none;
+cursor: pointer;
+-webkit-appearance: none;
+transition: all 0.3s ease;
+}
+
+.hero-btn-primary {
+background-color: #C9A84C;
+color: #000000;
+border: 2px solid #C9A84C;
+box-shadow: 0 4px 20px rgba(201,168,76,0.4);
+}
+.hero-btn-primary:hover {
+background-color: #E8C97A;
+border-color: #E8C97A;
+}
+
+.hero-btn-outline {
+background-color: transparent;
+color: #C9A84C;
+border: 2px solid #C9A84C;
+}
+.hero-btn-outline:hover {
+background-color: rgba(201,168,76,0.15);
+}
+
+/* SOCIAL */
+.hero-social {
+display: -webkit-flex;
+display: flex;
+-webkit-align-items: center;
+align-items: center;
+-webkit-justify-content: center;
+justify-content: center;
+gap: 0.8rem;
+margin-top: 1.6rem;
+}
+.social-link {
+display: -webkit-inline-flex;
+display: inline-flex;
+-webkit-align-items: center;
+align-items: center;
+gap: 0.4rem;
+color: rgba(201,168,76,0.8);
+text-decoration: none;
+font-size: 0.72rem;
+font-weight: 500;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+transition: color 0.3s;
+}
+.social-link:hover { color: #C9A84C; }
+.social-sep { color: rgba(201,168,76,0.3); }
+
+/* Scroll indicator */
+.hero-scroll {
+position: absolute;
+bottom: 2.5rem;
+left: 50%;
+-webkit-transform: translateX(-50%);
+transform: translateX(-50%);
+display: -webkit-flex;
+display: flex;
+-webkit-flex-direction: column;
+flex-direction: column;
+-webkit-align-items: center;
+align-items: center;
+gap: 0.5rem;
+}
+.scroll-line {
+width: 1px; height: 40px;
+background: linear-gradient(to bottom, #C9A84C, transparent);
+-webkit-animation: scrollAnim 2s ease-in-out infinite;
+animation: scrollAnim 2s ease-in-out infinite;
+}
+@-webkit-keyframes scrollAnim {
+0%,100% { opacity:0.2; } 50% { opacity:1; }
+}
+@keyframes scrollAnim {
+0%,100% { opacity:0.2; } 50% { opacity:1; }
+}
+.scroll-label {
+font-size: 0.6rem;
+letter-spacing: 0.35em;
+color: rgba(201,168,76,0.45);
+text-transform: uppercase;
+}
+
+/* ══ SECTIONS COMMUNES ══ */
+section {
+min-height: 100vh;
+padding: 7rem 1.5rem;
+background-color: #080808;
+display: -webkit-flex;
+display: flex;
+-webkit-flex-direction: column;
+flex-direction: column;
+-webkit-align-items: center;
+align-items: center;
+-webkit-justify-content: center;
+justify-content: center;
+}
+
+section:nth-child(even) { background-color: #0a0a08; }
+
+.section-label {
+font-size: 0.72rem;
+letter-spacing: 0.45em;
+color: rgba(201,168,76,0.7);
+text-transform: uppercase;
+margin-bottom: 0.6rem;
+font-weight: 500;
+text-align: center;
+}
+
+.section-title {
+font-family: ‘Cinzel’, serif;
+font-weight: 700;
+font-size: clamp(2rem, 5vw, 3rem);
+color: #C9A84C;
+letter-spacing: 0.2em;
+text-align: center;
+margin-bottom: 0.4rem;
+text-shadow: 0 0 30px rgba(201,168,76,0.25);
+}
+
+.section-subtitle {
+font-family: ‘Cormorant Garamond’, serif;
+font-style: italic;
+color: rgba(242,235,217,0.55);
+font-size: 1.15rem;
+font-weight: 600;
+letter-spacing: 0.12em;
+text-align: center;
+margin-bottom: 3.5rem;
+}
+
+/* ══ REVEAL ══ */
+.reveal {
+opacity: 0;
+-webkit-transform: translateY(28px);
+transform: translateY(28px);
+transition: opacity 0.9s ease, -webkit-transform 0.9s ease, transform 0.9s ease;
+}
+.reveal.visible {
+opacity: 1;
+-webkit-transform: translateY(0);
+transform: translateY(0);
+}
+
+/* ══ ÉPILATIONS ══ */
+.epil-grid {
+display: -webkit-flex;
+display: flex;
+gap: 2rem;
+max-width: 680px;
+width: 100%;
+-webkit-flex-wrap: wrap;
+flex-wrap: wrap;
+}
+.epil-col { flex: 1; min-width: 240px; }
+
+.epil-item {
+display: -webkit-flex;
+display: flex;
+-webkit-justify-content: space-between;
+justify-content: space-between;
+-webkit-align-items: center;
+align-items: center;
+padding: 0.9rem 0;
+border-bottom: 1px solid rgba(201,168,76,0.12);
+}
+.epil-name {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 1.2rem;
+font-weight: 600;
+color: #F2EBD9;
+}
+.epil-price {
+font-family: ‘Jost’, sans-serif;
+font-weight: 600;
+font-size: 0.9rem;
+color: #C9A84C;
+letter-spacing: 0.1em;
+}
+
+/* ══ GOMMAGES ══ */
+.gommage-cards {
+display: -webkit-flex;
+display: flex;
+-webkit-flex-wrap: wrap;
+flex-wrap: wrap;
+gap: 1.2rem;
+max-width: 680px;
+-webkit-justify-content: center;
+justify-content: center;
+}
+.gommage-card {
+background-color: rgba(201,168,76,0.05);
+border: 1px solid rgba(201,168,76,0.2);
+border-radius: 4px;
+padding: 1.6rem;
+width: calc(50% - 0.6rem);
+min-width: 240px;
+transition: border-color 0.3s, background-color 0.3s;
+}
+.gommage-card:hover {
+border-color: rgba(201,168,76,0.45);
+background-color: rgba(201,168,76,0.08);
+}
+.gommage-num {
+font-family: ‘Cinzel’, serif;
+font-size: 2.5rem;
+color: rgba(201,168,76,0.18);
+line-height: 1;
+margin-bottom: 0.8rem;
+}
+.gommage-name {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 1.15rem;
+font-weight: 600;
+color: #F2EBD9;
+line-height: 1.4;
+margin-bottom: 0.8rem;
+}
+.gommage-price {
+font-family: ‘Jost’, sans-serif;
+font-weight: 600;
+font-size: 0.95rem;
+color: #C9A84C;
+letter-spacing: 0.15em;
+}
+
+/* ══ SOINS VISAGE ══ */
+.visage-table { width: 100%; max-width: 740px; }
+.visage-row {
+display: -webkit-flex;
+display: flex;
+-webkit-align-items: center;
+align-items: center;
+padding: 1rem 0;
+border-bottom: 1px solid rgba(201,168,76,0.1);
+gap: 1rem;
+transition: padding-left 0.3s;
+}
+.visage-row:hover { padding-left: 0.8rem; }
+
+.visage-icon {
+width: 32px; height: 32px;
+border: 1px solid rgba(201,168,76,0.25);
+border-radius: 50%;
+display: -webkit-flex;
+display: flex;
+-webkit-align-items: center;
+align-items: center;
+-webkit-justify-content: center;
+justify-content: center;
+flex-shrink: 0;
+color: #C9A84C;
+font-size: 0.8rem;
+transition: all 0.3s;
+}
+.visage-row:hover .visage-icon {
+background-color: rgba(201,168,76,0.12);
+border-color: #C9A84C;
+}
+
+.visage-info { flex: 1; }
+.visage-name {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 1.2rem;
+font-weight: 600;
+color: #F2EBD9;
+}
+.visage-note {
+font-size: 0.68rem;
+font-weight: 500;
+color: rgba(201,168,76,0.6);
+letter-spacing: 0.2em;
+text-transform: uppercase;
+margin-top: 0.1rem;
+}
+.visage-price {
+font-family: ‘Jost’, sans-serif;
+font-weight: 600;
+font-size: 0.95rem;
+color: #C9A84C;
+letter-spacing: 0.1em;
+white-space: nowrap;
+}
+
+/* ══ ENVELOPPEMENTS ══ */
+.env-pills {
+display: -webkit-flex;
+display: flex;
+-webkit-flex-wrap: wrap;
+flex-wrap: wrap;
+gap: 0.9rem;
+-webkit-justify-content: center;
+justify-content: center;
+max-width: 760px;
+}
+.env-pill {
+display: -webkit-inline-flex;
+display: inline-flex;
+-webkit-align-items: center;
+align-items: center;
+gap: 0.7rem;
+padding: 0.9rem 1.4rem;
+border: 1px solid rgba(201,168,76,0.22);
+border-radius: 100px;
+background-color: rgba(201,168,76,0.04);
+transition: all 0.3s ease;
+cursor: default;
+}
+.env-pill:hover {
+border-color: #C9A84C;
+background-color: rgba(201,168,76,0.1);
+-webkit-transform: translateY(-2px);
+transform: translateY(-2px);
+}
+.env-dot {
+width: 7px; height: 7px;
+border-radius: 50%;
+background-color: #C9A84C;
+flex-shrink: 0;
+}
+.env-name {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 1.1rem;
+font-weight: 600;
+color: #F2EBD9;
+}
+.env-price {
+font-family: ‘Jost’, sans-serif;
+font-weight: 500;
+font-size: 0.8rem;
+color: #C9A84C;
+letter-spacing: 0.2em;
+}
+
+/* ══ MASSAGES ══ */
+#massages { position: relative; }
+#massages::before {
+content:’’;
+position: absolute;
+top:0; left:0; right:0;
+height:1px;
+background: linear-gradient(to right, transparent, #C9A84C, transparent);
+}
+#massages::after {
+content:’’;
+position: absolute;
+bottom:0; left:0; right:0;
+height:1px;
+background: linear-gradient(to right, transparent, #C9A84C, transparent);
+}
+
+.massage-list { width: 100%; max-width: 740px; }
+.massage-item {
+display: -webkit-flex;
+display: flex;
+-webkit-align-items: center;
+align-items: center;
+padding: 1.2rem 0;
+border-bottom: 1px solid rgba(201,168,76,0.1);
+gap: 1rem;
+transition: background-color 0.3s, padding 0.3s;
+}
+.massage-item:hover {
+background-color: rgba(201,168,76,0.04);
+padding-left: 0.8rem;
+padding-right: 0.8rem;
+}
+
+.massage-idx {
+font-family: ‘Cinzel’, serif;
+font-size: 0.65rem;
+font-weight: 700;
+color: rgba(201,168,76,0.5);
+width: 22px;
+letter-spacing: 0.15em;
+flex-shrink: 0;
+}
+.massage-name {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 1.25rem;
+font-weight: 600;
+color: #F2EBD9;
+flex: 1;
+}
+.massage-duration {
+font-family: ‘Jost’, sans-serif;
+font-size: 0.72rem;
+font-weight: 500;
+color: rgba(201,168,76,0.7);
+letter-spacing: 0.15em;
+text-transform: uppercase;
+white-space: nowrap;
+padding: 0.2rem 0.55rem;
+border: 1px solid rgba(201,168,76,0.22);
+border-radius: 100px;
+background-color: rgba(201,168,76,0.06);
+}
+.massage-price {
+font-family: ‘Jost’, sans-serif;
+font-weight: 700;
+font-size: 1rem;
+color: #C9A84C;
+letter-spacing: 0.1em;
+white-space: nowrap;
+text-align: right;
+min-width: 100px;
+}
+
+/* ══ FOOTER ══ */
+footer {
+background-color: #050505;
+padding: 4rem 1.5rem;
+text-align: center;
+border-top: 1px solid rgba(201,168,76,0.15);
+}
+.footer-brand {
+font-family: ‘Cinzel’, serif;
+font-size: 2.5rem;
+font-weight: 900;
+color: #C9A84C;
+letter-spacing: 0.3em;
+text-shadow: 0 0 30px rgba(201,168,76,0.3);
+margin-bottom: 0.4rem;
+}
+.footer-sub {
+font-family: ‘Cormorant Garamond’, serif;
+font-style: italic;
+font-size: 1.1rem;
+font-weight: 600;
+color: rgba(201,168,76,0.8);
+letter-spacing: 0.3em;
+margin-bottom: 1.5rem;
+}
+.footer-line {
+width: 80px; height: 1px;
+background: linear-gradient(to right, transparent, #C9A84C, transparent);
+margin: 1.5rem auto;
+}
+.footer-copy {
+font-size: 0.72rem;
+font-weight: 500;
+letter-spacing: 0.28em;
+color: rgba(242,235,217,0.38);
+text-transform: uppercase;
+}
+
+/* ══ RESPONSIVE ══ */
+@media (max-width: 560px) {
+.gommage-card { width: 100%; min-width: unset; }
+.massage-idx, .massage-duration { display: none; }
+.nav-dots { display: none; }
+section { padding: 5rem 1rem; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- NAV DOTS -->
+
+<nav class="nav-dots">
+  <button class="nav-dot active" onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'})"></button>
+  <button class="nav-dot" onclick="document.getElementById('epilations').scrollIntoView({behavior:'smooth'})"></button>
+  <button class="nav-dot" onclick="document.getElementById('gommages').scrollIntoView({behavior:'smooth'})"></button>
+  <button class="nav-dot" onclick="document.getElementById('soins-visage').scrollIntoView({behavior:'smooth'})"></button>
+  <button class="nav-dot" onclick="document.getElementById('enveloppements').scrollIntoView({behavior:'smooth'})"></button>
+  <button class="nav-dot" onclick="document.getElementById('massages').scrollIntoView({behavior:'smooth'})"></button>
+</nav>
+
+<!-- ══ HERO ══ -->
+
+<div id="hero">
+  <div class="ring"></div>
+  <div class="ring"></div>
+  <div class="ring"></div>
+
+  <div class="hero-inner">
+    <div class="hero-brand">TYA</div>
+    <div class="hero-sub">hair &amp; spa</div>
+
+```
+<div class="hero-orn">
+  <div class="hero-orn-line"></div>
+  <span class="hero-orn-gem">◆</span>
+  <div class="hero-orn-line"></div>
+</div>
+
+<div class="hero-tagline">Beauté &nbsp;·&nbsp; Bien-être &nbsp;·&nbsp; Élégance</div>
+
+<div class="hero-actions">
+  <a href="https://wa.me/2250000000000?text=Bonjour%2C%20je%20souhaite%20prendre%20rendez-vous%20chez%20TYA%20Hair%20%26%20Spa" target="_blank" class="hero-btn hero-btn-primary">
+    📅 &nbsp;Réserver
+  </a>
+  <a href="https://www.google.com/maps/search/TYA+Hair+Spa+Abidjan" target="_blank" class="hero-btn hero-btn-outline">
+    📍 &nbsp;Localisation
+  </a>
+</div>
+
+<div class="hero-social">
+  <a href="https://www.facebook.com/TYA_HAIR_SPA" target="_blank" class="social-link">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+    Facebook
+  </a>
+  <span class="social-sep">·</span>
+  <a href="https://www.instagram.com/TYA_HAIR_SPA" target="_blank" class="social-link">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+    Instagram
+  </a>
+</div>
+```
+
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span class="scroll-label">Découvrir</span>
+  </div>
+</div>
+
+<!-- ══ ÉPILATIONS ══ -->
+
+<section id="epilations">
+  <div class="reveal">
+    <p class="section-label">01 — Rituels du Corps</p>
+    <h2 class="section-title">Épilations</h2>
+    <p class="section-subtitle">La précision au service de la douceur</p>
+  </div>
+  <div class="epil-grid reveal">
+    <div class="epil-col">
+      <div class="epil-item"><span class="epil-name">Corps intégral</span><span class="epil-price">35 000 CFA</span></div>
+      <div class="epil-item"><span class="epil-name">Jambes</span><span class="epil-price">20 000 CFA</span></div>
+      <div class="epil-item"><span class="epil-name">Bras</span><span class="epil-price">10 000 CFA</span></div>
+      <div class="epil-item"><span class="epil-name">Maillot</span><span class="epil-price">10 000 CFA</span></div>
+    </div>
+    <div class="epil-col">
+      <div class="epil-item"><span class="epil-name">Les mollets</span><span class="epil-price">10 000 CFA</span></div>
+      <div class="epil-item"><span class="epil-name">Vajacial simple</span><span class="epil-price">15 000 CFA</span></div>
+      <div class="epil-item"><span class="epil-name">Vajacial soin complet</span><span class="epil-price">25 000 CFA</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ GOMMAGES ══ -->
+
+<section id="gommages">
+  <div class="reveal">
+    <p class="section-label">02 — Exfoliation Profonde</p>
+    <h2 class="section-title">Gommages Corps</h2>
+    <p class="section-subtitle">Révélez l'éclat naturel de votre peau</p>
+  </div>
+  <div class="gommage-cards reveal">
+    <div class="gommage-card">
+      <div class="gommage-num">01</div>
+      <div class="gommage-name">Gommage corps complet raffermissant</div>
+      <div class="gommage-price">25 000 CFA</div>
+    </div>
+    <div class="gommage-card">
+      <div class="gommage-num">02</div>
+      <div class="gommage-name">Gommage corps clarifiant</div>
+      <div class="gommage-price">25 000 CFA</div>
+    </div>
+    <div class="gommage-card">
+      <div class="gommage-num">03</div>
+      <div class="gommage-name">Gommage corps éclaircissant &amp; anti-taches</div>
+      <div class="gommage-price">30 000 CFA</div>
+    </div>
+    <div class="gommage-card">
+      <div class="gommage-num">04</div>
+      <div class="gommage-name">Gommage corps classique</div>
+      <div class="gommage-price">20 000 CFA</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SOINS VISAGE ══ -->
+
+<section id="soins-visage">
+  <div class="reveal">
+    <p class="section-label">03 — Expertise Esthétique</p>
+    <h2 class="section-title">Soins Visage</h2>
+    <p class="section-subtitle">Des soins haute technologie pour une peau parfaite</p>
+  </div>
+  <div class="visage-table reveal">
+    <div class="visage-row">
+      <div class="visage-icon">✦</div>
+      <div class="visage-info"><div class="visage-name">Soin réparateur &amp; purifiant</div><div class="visage-note">Hydratation profonde</div></div>
+      <div class="visage-price">30 000 CFA</div>
+    </div>
+    <div class="visage-row">
+      <div class="visage-icon">◈</div>
+      <div class="visage-info"><div class="visage-name">Hydra Facial soins simples</div><div class="visage-note">Éclat immédiat</div></div>
+      <div class="visage-price">30 000 CFA</div>
+    </div>
+    <div class="visage-row">
+      <div class="visage-icon">⬡</div>
+      <div class="visage-info"><div class="visage-name">Microdermabrasion</div><div class="visage-note">Exfoliation mécanique</div></div>
+      <div class="visage-price">30 000 CFA</div>
+    </div>
+    <div class="visage-row">
+      <div class="visage-icon">◇</div>
+      <div class="visage-info"><div class="visage-name">Dermaplaning</div><div class="visage-note">Lissage &amp; duvet</div></div>
+      <div class="visage-price">30 000 CFA</div>
+    </div>
+    <div class="visage-row">
+      <div class="visage-icon">⬢</div>
+      <div class="visage-info"><div class="visage-name">Microneedling</div><div class="visage-note">Stimulation du collagène</div></div>
+      <div class="visage-price">35 000 CFA</div>
+    </div>
+    <div class="visage-row">
+      <div class="visage-icon">✧</div>
+      <div class="visage-info"><div class="visage-name">Hydrafacial soins complet</div><div class="visage-note">Protocole premium</div></div>
+      <div class="visage-price">35 000 CFA</div>
+    </div>
+    <div class="visage-row">
+      <div class="visage-icon">★</div>
+      <div class="visage-info"><div class="visage-name">Microdling BBglow</div><div class="visage-note">Signature TYA</div></div>
+      <div class="visage-price">45 000 CFA</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ENVELOPPEMENTS ══ -->
+
+<section id="enveloppements">
+  <div class="reveal">
+    <p class="section-label">04 — Rituel Végétal</p>
+    <h2 class="section-title">Enveloppements</h2>
+    <p class="section-subtitle">La nature au cœur du soin</p>
+  </div>
+  <div class="env-pills reveal">
+    <div class="env-pill"><div class="env-dot"></div><div><div class="env-name">Curcuma</div><div class="env-price">5 000 CFA</div></div></div>
+    <div class="env-pill"><div class="env-dot"></div><div><div class="env-name">Aux Fruits</div><div class="env-price">5 000 CFA</div></div></div>
+    <div class="env-pill"><div class="env-dot"></div><div><div class="env-name">Rhassoul</div><div class="env-price">5 000 CFA</div></div></div>
+    <div class="env-pill"><div class="env-dot"></div><div><div class="env-name">Poudre d'Hibiscus</div><div class="env-price">5 000 CFA</div></div></div>
+    <div class="env-pill"><div class="env-dot"></div><div><div class="env-name">Poudre de Nila</div><div class="env-price">10 000 CFA</div></div></div>
+    <div class="env-pill"><div class="env-dot"></div><div><div class="env-name">Henné</div><div class="env-price">5 000 CFA</div></div></div>
+    <div class="env-pill"><div class="env-dot"></div><div><div class="env-name">Poudre de Cacao</div><div class="env-price">5 000 CFA</div></div></div>
+  </div>
+</section>
+
+<!-- ══ MASSAGES ══ -->
+
+<section id="massages">
+  <div class="reveal">
+    <p class="section-label">05 — L'Art du Toucher</p>
+    <h2 class="section-title">Massages</h2>
+    <p class="section-subtitle">Un voyage sensoriel vers l'apaisement total</p>
+  </div>
+  <div class="massage-list reveal">
+    <div class="massage-item">
+      <span class="massage-idx">01</span>
+      <span class="massage-name">Massage pour couples</span>
+      <span class="massage-duration">1h00</span>
+      <span class="massage-price">45 000 CFA</span>
+    </div>
+    <div class="massage-item">
+      <span class="massage-idx">02</span>
+      <span class="massage-name">Deux masseurs / masseuses</span>
+      <span class="massage-duration">1h00</span>
+      <span class="massage-price">40 000 CFA</span>
+    </div>
+    <div class="massage-item">
+      <span class="massage-idx">03</span>
+      <span class="massage-name">Massage relaxant aux pierres chaudes</span>
+      <span class="massage-duration">1h00</span>
+      <span class="massage-price">30 000 CFA</span>
+    </div>
+    <div class="massage-item">
+      <span class="massage-idx">04</span>
+      <span class="massage-name">Massage relaxant</span>
+      <span class="massage-duration">1h00</span>
+      <span class="massage-price">25 000 CFA</span>
+    </div>
+    <div class="massage-item">
+      <span class="massage-idx">05</span>
+      <span class="massage-name">Massage zone ciblée</span>
+      <span class="massage-duration">30 min</span>
+      <span class="massage-price">15 000 CFA</span>
+    </div>
+    <div class="massage-item">
+      <span class="massage-idx">06</span>
+      <span class="massage-name">Massage tonique</span>
+      <span class="massage-duration">1h00</span>
+      <span class="massage-price">35 000 CFA</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+
+<footer>
+  <div class="footer-brand">TYA</div>
+  <div class="footer-sub">hair &amp; spa</div>
+  <div class="footer-line"></div>
+  <p class="footer-copy">Facebook &amp; Instagram : TYA_HAIR_SPA &nbsp;·&nbsp; Abidjan, Côte d'Ivoire</p>
+</footer>
+
+<script>
+// Reveal on scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Nav dots
+const secIds = ['hero','epilations','gommages','soins-visage','enveloppements','massages'];
+const dots = document.querySelectorAll('.nav-dot');
+const secObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      const i = secIds.indexOf(e.target.id);
+      dots.forEach((d,j) => d.classList.toggle('active', i===j));
+    }
+  });
+}, { threshold: 0.4 });
+secIds.forEach(id => { const el = document.getElementById(id); if(el) secObs.observe(el); });
+</script>
+
+</body>
+</html>
